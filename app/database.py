@@ -1,7 +1,7 @@
+import os
 from sqlalchemy import create_engine, inspect
 
 
-DATABASE_URL = "postgresql://postgres:password@db/postgres"
-engine = create_engine(DATABASE_URL)
+engine = create_engine(os.environ.get('DATABASE_URL'))
 conn = engine.connect()
 inspector = inspect(engine)
