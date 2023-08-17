@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    image: fastapi-app-image
+    container_name: fastapi-app-container
+    command: python main.py
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000

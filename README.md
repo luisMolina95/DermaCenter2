@@ -6,6 +6,6 @@ python -m pip install --user virtualenv
 python -m venv env
 
 .\env\Scripts\activate
-source env/bin/activate
+source env/Scripts/Activate
 
 python -m pip install -r requirements.txt
