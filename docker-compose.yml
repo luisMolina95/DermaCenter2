@@ -19,7 +19,7 @@ services:
     build: .
     image: fastapi-app-image
     container_name: fastapi-app-container
-    command: python main.py
+    command: bash -c "alembic upgrade head && python main.py"
     volumes:
       - .:/code
     env_file: .env
