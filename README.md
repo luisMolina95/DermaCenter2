@@ -20,3 +20,6 @@ python -m pip install -r requirements.txt
 Todos los commits son mios, es la cuenta de mi hemano que no me fije que estaba en git:
 git config --global user.name <>
 Change Git user email by running: git config --global user.email <>
+
+
+alembic revision --autogenerate -m "Description of changes"
