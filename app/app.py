@@ -11,10 +11,15 @@ app = FastAPI()
 async def root() -> dict:
     return {"Ping": "Pong", "extra": os.environ.get('APP_TCP_PORT')}
 
-@app.post("/user",tags=['USER'])
-def index(user: UserBase, db: Session = Depends(get_db)):
+@app.post("/users",tags=['USERS'])
+def post_user(user: UserBase, db: Session = Depends(get_db)):
     db_user = User(username=user.username)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
+
+@app.get("/users",tags=['USERS'])
+def get_users(db: Session = Depends(get_db)):
+    users = db.query(User).all()
+    return users
