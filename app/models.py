@@ -36,8 +36,8 @@ class Inventario(Base):
     sucursal_id: Mapped[int] = mapped_column(ForeignKey("sucursales.sucursal_id"))
     sucursal: Mapped["Sucursal"] = relationship(back_populates="inventarios")
     pedidos: Mapped[List["Pedido"]] = relationship(back_populates="inventario")
-    # transferencias_origen: Mapped[List["Transferencia"]] = relationship(back_populates="inventario_origen")
-    # transferencias_destino: Mapped[List["Transferencia"]] = relationship(back_populates="inventario_destino")
+    transferencias_origen: Mapped[List["Transferencia"]] = relationship(back_populates="inventario_origen", foreign_keys="Transferencia.inventario_origen_id")
+    transferencias_destino: Mapped[List["Transferencia"]] = relationship(back_populates="inventario_destino", foreign_keys="Transferencia.inventario_destino_id")
 
 
 class Pedido(Base):
@@ -59,9 +59,9 @@ class Transferencia(Base):
     transferencia_id: Mapped[int] = mapped_column(primary_key=True)
     fecha: Mapped[datetime.datetime] = mapped_column(server_default=func.CURRENT_TIMESTAMP())
     inventario_origen_id: Mapped[int] = mapped_column(ForeignKey("inventarios.inventario_id"))
-    inventario_origen: Mapped["Inventario"] = relationship(foreign_keys=[inventario_origen_id]) # back_populates="transferencias_origen"
+    inventario_origen: Mapped["Inventario"] = relationship(foreign_keys="Transferencia.inventario_origen_id", back_populates="transferencias_origen") 
     inventario_destino_id: Mapped[int] = mapped_column(ForeignKey("inventarios.inventario_id"))
-    inventario_destino: Mapped["Inventario"] = relationship(foreign_keys=[inventario_destino_id]) # back_populates="transferencias_origen"
+    inventario_destino: Mapped["Inventario"] = relationship(foreign_keys="Transferencia.inventario_destino_id", back_populates="transferencias_destino") 
     pedido_id: Mapped[int] = mapped_column(ForeignKey("pedidos.pedido_id"))
     pedido: Mapped["Pedido"] = relationship(back_populates="transferencias")
 
