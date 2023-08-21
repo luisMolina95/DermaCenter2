@@ -33,8 +33,8 @@ async def root() -> dict:
 
 @app.get("/users", tags=['USERS'])
 async def get_users(db: AsyncSession = Depends(get_db)):
-    query = select(Inventario, Transferencia).where(column("inventario_id") == 1).options(
-        joinedload(Inventario.transferencias_destino), joinedload(Inventario.transferencias_origen))
+    query = select(Inventario, Transferencia).options(
+        joinedload(Inventario.transferencias_destino), joinedload(Inventario.transferencias_origen)).where(column("inventario_id") == 1)
     result = await db.execute(query)
     todo = result.scalars().first()
     print(todo)
