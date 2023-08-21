@@ -4,12 +4,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Enum, func, ForeignKey
 from app.database import Base
 
-
-class User(Base):
-    __tablename__ = "users"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(unique=True)
-
 class Sucursal(Base):
     __tablename__ = "sucursales"
     sucursal_id: Mapped[int] = mapped_column(primary_key=True)
@@ -52,10 +46,10 @@ class Pedido(Base):
     cantidad: Mapped[int] = mapped_column(nullable=False)
     estado: Mapped[Literal["ingresado", "en proceso", "finalizado"]] = mapped_column(Enum("ingresado", "en proceso", "finalizado", name="estado_pedido"))
     fecha: Mapped[datetime.datetime] = mapped_column(server_default=func.CURRENT_TIMESTAMP())
+    producto_id: Mapped[int] = mapped_column(ForeignKey("productos.producto_id"))
     producto: Mapped["Producto"] = relationship(back_populates="pedidos")
     inventario_id: Mapped[int] = mapped_column(ForeignKey("inventarios.inventario_id"))
     inventario: Mapped["Inventario"] = relationship(back_populates="pedidos")
-    transferencia_id: Mapped[int] = mapped_column(ForeignKey("transferencias.transferencia_id"))
     transferencias: Mapped[List["Transferencia"]] = relationship(back_populates="pedido")
 
 
