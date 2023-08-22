@@ -1,13 +1,11 @@
-import os
-import json
 from fastapi import Depends, FastAPI
-from sqlalchemy import column, select
-from sqlalchemy.orm import joinedload, load_only, lazyload
+from sqlalchemy import select
+from sqlalchemy.orm import joinedload, load_only
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.models import Pedido, Inventario, Sucursal
+from app.schemas import PedidoBase
 
-# from app.schemas import UserBase
 app = FastAPI()
 
 
@@ -15,24 +13,18 @@ app = FastAPI()
 async def root() -> dict:
     return {"Ping": "Pong"}
 
-# @app.post("/users",tags=['USERS'])
-# async def post_user(user: UserBase, db: AsyncSession = Depends(get_db)):
-#     db_user = User(username=user.username)
-#     db.add(db_user)
-#     await db.commit()
-#     await db.refresh(db_user)
-#     return db_user
+
+@app.post("/pedidos", tags=['PEDIDOS'])
+async def post_user(pedido: PedidoBase, db: AsyncSession = Depends(get_db)):
+    db_pedido = Pedido(producto_id=pedido.producto_id, inventario_id=pedido.inventario_id,
+                     cantidad=pedido.cantidad, estado="ingresado")
+    db.add(db_pedido)
+    await db.commit()
+    await db.refresh(db_pedido)
+    return {"data": db_pedido}
 
 
-# @app.get("/users",tags=['USERS'])
-# async def get_users(db: AsyncSession = Depends(get_db)):
-#     query = select(Sucursal, Regente).options(joinedload(Sucursal.regentes))
-#     result = await db.execute(query)
-#     todo = result.scalars().first()
-#     print(todo)
-#     return todo
-
-@app.get("/pedidos/{id}")
+@app.get("/pedidos/{id}", tags=['PEDIDOS'])
 async def read_item(id: int, db: AsyncSession = Depends(get_db)):
     query = select(Pedido).options(joinedload(Pedido.producto)).options(joinedload(Pedido.inventario).subqueryload(
         Inventario.sucursal).subqueryload(Sucursal.regentes)).where(Pedido.pedido_id == id)
