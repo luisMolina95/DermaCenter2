@@ -23,3 +23,5 @@ Change Git user email by running: git config --global user.email <>
 
 
 alembic revision --autogenerate -m "Description of changes"
+
+[![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://youtu.be/vt5fpE0bzSY)
