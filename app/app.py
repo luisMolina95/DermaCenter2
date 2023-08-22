@@ -32,6 +32,15 @@ async def root() -> dict:
 #     print(todo)
 #     return todo
 
+@app.get("/pedidos/{id}")
+async def read_item(id: int, db: AsyncSession = Depends(get_db)):
+    query = select(Pedido).options(joinedload(Pedido.producto)).options(joinedload(Pedido.inventario).subqueryload(
+        Inventario.sucursal).subqueryload(Sucursal.regentes)).where(Pedido.pedido_id == id)
+    result = await db.execute(query)
+    todo = result.scalar()
+    return {"data": todo}
+
+
 @app.get("/pedidos", tags=['PEDIDOS'])
 async def get_pedidos(db: AsyncSession = Depends(get_db)):
     query = select(Pedido).options(load_only(Pedido.estado, Pedido.fecha)).options(joinedload(Pedido.inventario).options(load_only(
