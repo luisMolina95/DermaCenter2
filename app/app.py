@@ -1,10 +1,11 @@
 import os
+import json
 from fastapi import Depends, FastAPI
 from sqlalchemy import column, select
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, load_only, lazyload
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
-from app.models import Sucursal, Regente, Inventario, Transferencia
+from app.models import Pedido, Inventario, Sucursal
 
 # from app.schemas import UserBase
 app = FastAPI()
@@ -12,7 +13,7 @@ app = FastAPI()
 
 @app.get("/", tags=['ROOT'])
 async def root() -> dict:
-    return {"Ping": "Pong", "extra": os.environ.get('APP_TCP_PORT')}
+    return {"Ping": "Pong"}
 
 # @app.post("/users",tags=['USERS'])
 # async def post_user(user: UserBase, db: AsyncSession = Depends(get_db)):
@@ -31,11 +32,10 @@ async def root() -> dict:
 #     print(todo)
 #     return todo
 
-@app.get("/users", tags=['USERS'])
-async def get_users(db: AsyncSession = Depends(get_db)):
-    query = select(Inventario, Transferencia).options(
-        joinedload(Inventario.transferencias_destino), joinedload(Inventario.transferencias_origen)).where(column("inventario_id") == 1)
+@app.get("/pedidos", tags=['PEDIDOS'])
+async def get_pedidos(db: AsyncSession = Depends(get_db)):
+    query = select(Pedido).options(load_only(Pedido.estado, Pedido.fecha)).options(joinedload(Pedido.inventario).options(load_only(
+        Inventario.sucursal_id)).subqueryload(Inventario.sucursal).options(load_only(Sucursal.nombre)))
     result = await db.execute(query)
-    todo = result.scalars().first()
-    print(todo)
-    return todo
+    todo = result.unique().scalars().all()
+    return {"data": todo}
