@@ -24,4 +24,4 @@ Change Git user email by running: git config --global user.email <>
 
 alembic revision --autogenerate -m "Description of changes"
 
-[![ERD]([https://i.stack.imgur.com/Vp2cE.png](https://raw.githubusercontent.com/luisMolina95/DermaCenter2/aae485b9649dc8791054318187be44d46e90eccc/erd.svg?token=ANZ4WRTQN4KWFZTRWL5UJF3E4UWPC)https://raw.githubusercontent.com/luisMolina95/DermaCenter2/aae485b9649dc8791054318187be44d46e90eccc/erd.svg?token=ANZ4WRTQN4KWFZTRWL5UJF3E4UWPC)]
+[![ERD]([https://raw.githubusercontent.com/luisMolina95/DermaCenter2/aae485b9649dc8791054318187be44d46e90eccc/erd.svg?token=ANZ4WRTQN4KWFZTRWL5UJF3E4UWPC)]
