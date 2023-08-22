@@ -121,51 +121,51 @@ def upgrade() -> None:
                                            )
 
     op.bulk_insert(table_productos, [
-                   {'producto_id': 1, 'nombre': 'aspirina',
+                   {'nombre': 'aspirina',
                        'precio': 0.99, 'descripcion': 'aspirina mk'},
-                   {'producto_id': 2, 'nombre': 'cofal',
+                   {'nombre': 'cofal',
                        'precio': 1.99, 'descripcion': 'cofal fuerte'},
-                   {'producto_id': 3, 'nombre': 'vitamina c',
+                   {'nombre': 'vitamina c',
                        'precio': 2.99, 'descripcion': 'masticable'},
-                   {'producto_id': 4, 'nombre': 'suero',
+                   {'nombre': 'suero',
                        'precio': 3.99, 'descripcion': 'frutas'},
-                   {'producto_id': 5, 'nombre': 'curitas',
+                   {'nombre': 'curitas',
                     'precio': 4.99, 'descripcion': 'impermeables'}])
 
     op.bulk_insert(table_sucursales, [
-                   {'sucursal_id': 1, 'nombre': 'san nicolas',
+                   {'nombre': 'san nicolas',
                        'descripcion': 'metrocentro'},
-                   {'sucursal_id': 2, 'nombre': 'economicas', 'descripcion': 'ayutuxtepeque'}])
+                   {'nombre': 'economicas', 'descripcion': 'ayutuxtepeque'}])
 
     op.bulk_insert(table_dependientes, [
-                   {'sucursal_id': 1, 'nombre': 'antonio',
+                   {'nombre': 'antonio',
                        'dui': '123456-1', 'sucursal_id': 1},
-                   {'sucursal_id': 2, 'nombre': 'ivan',
+                   {'nombre': 'ivan',
                        'dui': '654321-2', 'sucursal_id': 1},
-                   {'sucursal_id': 3, 'nombre': 'edgar', 'dui': '234567-3', 'sucursal_id': 2}])
+                   {'nombre': 'edgar', 'dui': '234567-3', 'sucursal_id': 2}])
 
     op.bulk_insert(table_inventarios, [
-                   {'dependiente_id': 1, 'nombre': 'bodega', 'sucursal_id': 1},
-                   {'dependiente_id': 2, 'nombre': 'venta', 'sucursal_id': 1},
-                   {'dependiente_id': 3, 'nombre': 'devolucion', 'sucursal_id': 1},
-                   {'dependiente_id': 4, 'nombre': 'bodega', 'sucursal_id': 2},
-                   {'dependiente_id': 5, 'nombre': 'venta', 'sucursal_id': 2},
-                   {'dependiente_id': 6, 'nombre': 'devolucion', 'sucursal_id': 2}])
+                   {'nombre': 'bodega', 'sucursal_id': 1},
+                   {'nombre': 'venta', 'sucursal_id': 1},
+                   {'nombre': 'devolucion', 'sucursal_id': 1},
+                   {'nombre': 'bodega', 'sucursal_id': 2},
+                   {'nombre': 'venta', 'sucursal_id': 2},
+                   {'nombre': 'devolucion', 'sucursal_id': 2}])
 
     op.bulk_insert(table_regentes, [
-                   {'regente_id': 1, 'nombre': 'juan',
+                   {'nombre': 'juan',
                        'jvpqf': '1234567', 'sucursal_id': 1},
-                   {'regente_id': 2, 'nombre': 'carlos', 'jvpqf': '789456123', 'sucursal_id': 2}])
+                   {'nombre': 'carlos', 'jvpqf': '789456123', 'sucursal_id': 2}])
 
     op.bulk_insert(table_pedidos, [
-                   {'pedido_id': 1, 'cantidad': 10, 'estado': 'finalizado',
+                   {'cantidad': 10, 'estado': 'finalizado',
                        'producto_id': 1, 'inventario_id': 1},
-                   {'pedido_id': 2, 'cantidad': 20, 'estado': 'finalizado',
+                   {'cantidad': 20, 'estado': 'finalizado',
                        'producto_id': 2, 'inventario_id': 1},
-                   {'pedido_id': 3, 'cantidad': 30, 'estado': 'finalizado', 'producto_id': 3, 'inventario_id': 1}])
+                   {'cantidad': 30, 'estado': 'finalizado', 'producto_id': 3, 'inventario_id': 1}])
 
     op.bulk_insert(table_transferencias, [
-                   {'transferencia_id': 1, 'inventario_origen_id': 1, 'inventario_destino_id': 1, 'pedido_id': 1}])
+                   {'inventario_origen_id': 1, 'inventario_destino_id': 1, 'pedido_id': 1}])
     # ### end Alembic commands ###
 
 
