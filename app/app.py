@@ -14,10 +14,10 @@ async def root() -> dict:
     return {"Ping": "Pong"}
 
 
-@app.post("/pedidos", tags=['PEDIDOS'])
+@app.post("/pedidos", status_code=201, tags=['PEDIDOS'])
 async def post_user(pedido: PedidoBase, db: AsyncSession = Depends(get_db)):
     db_pedido = Pedido(producto_id=pedido.producto_id, inventario_id=pedido.inventario_id,
-                     cantidad=pedido.cantidad, estado="ingresado")
+                       cantidad=pedido.cantidad, estado="ingresado")
     db.add(db_pedido)
     await db.commit()
     await db.refresh(db_pedido)
