@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "69fb817b-02e6-47b6-85a0-b66c28abf42f",
+		"name": "Farmacia parte 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "13204783"
+	},
+	"item": [
+		{
+			"name": "http://localhost/pedidos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost/pedidos"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/pedidos/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost/pedidos/1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost/pedidos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"cantidad\": 7,\r\n\t\"producto_id\": 1,\r\n\t\"inventario_id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost/pedidos"
+			},
+			"response": []
+		}
+	]
+}

@@ -29,6 +29,12 @@ source env/Scripts/Activate
 
 -Ejecutar: docker-compose up --build
 
+**Documentacion:**
+
+http://localhost/docs  
+Postman:  
+./Farmacia parte 2.postman_collection.json
+
 
 **ERD:**
       
