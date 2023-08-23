@@ -25,6 +25,9 @@ python -m venv env
 .\env\Scripts\activate  
 source env/Scripts/Activate  
 
+-Correr migracion:  
+-alembic upgrade head
+
 **Correr con docker-compose:**
 
 -Ejecutar: docker-compose up --build
@@ -36,7 +39,9 @@ Postman:
 ./Farmacia parte 2.postman_collection.json
 
 
+**Demo:**
+./demostracion.mp4
+
 **ERD:**
       
 ![](./erd.svg)
-    
