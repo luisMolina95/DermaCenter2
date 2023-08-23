@@ -1,30 +1,36 @@
 # DermaCenter2
 Dermacenter practice part 2
 
-https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
-python -m pip install --user virtualenv
-python -m venv env
+**Requisitos:**
 
-.\env\Scripts\activate
-source env/Scripts/Activate
+-Instalar python (https://www.python.org/downloads/)
 
-docker-compose up --build
+-Instalar postgresSQL (https://www.postgresql.org/download/)
 
-docker run --rm -it -p 8000:8000  python-test
+-Instalar Docker (https://docs.docker.com/get-docker/)
 
-$${POSTGRES_DB}
+**Correr localmente:**
 
-python -m pip install -r requirements.txt
+-Crear archivo .env
 
-
-Todos los commits son mios, es la cuenta de mi hemano que no me fije que estaba en git:
-git config --global user.name <>
-Change Git user email by running: git config --global user.email <>
+-Crear copia .env.example
 
 
-alembic revision --autogenerate -m "Description of changes"
+-Configurar entorno:
+
+https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/  
+python -m pip install --user virtualenv  
+python -m venv env  
+
+.\env\Scripts\activate  
+source env/Scripts/Activate  
+
+**Correr con docker-compose:**
+
+-Ejecutar: docker-compose up --build
 
 
+**ERD:**
       
 ![](./erd.svg)
     
